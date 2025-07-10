@@ -1,7 +1,25 @@
+import os
 import streamlit as st
 import pandas as pd
 from annoy import AnnoyIndex
 import pickle
+
+def download_annoy_index(url, filename):
+    if not os.path.exists(filename):
+        st.info("Downloading model file. Please wait...")
+        response = requests.get(url)
+        if response.status_code == 200:
+            with open(filename, 'wb') as f:
+                f.write(response.content)
+            st.success("Model downloaded successfully!")
+        else:
+            st.error(f"Failed to download model file: {response.status_code}")
+            st.stop()
+
+# 📌 URL of the pre-trained Annoy model (change this to your actual Hugging Face link)
+annoy_model_url = "https://huggingface.co/your-username/book-recommendation-model/resolve/main/Book_Recommendation.ann"
+annoy_model_file = "Book_Recommendation.ann"
+download_annoy_index(annoy_model_url, annoy_model_file)
 
 # 📌 Load book data (Title & Index)
 # Reads book dataset from a CSV file. Ensure the file exists in the correct directory.
@@ -13,7 +31,9 @@ books = pd.read_csv("Book_Recommendation_Model/new_books.csv")  # Replace with y
 # 📌 Load the Annoy index for book recommendations
 dimension = 5000  # Ensure this matches the saved Annoy index dimension
 annoy_index = AnnoyIndex(dimension, 'angular')
-annoy_index.load("Book_Recommendation_Model/Book_Recommendation.ann")  # Loads the pre-trained Annoy index
+#annoy_index.load("Book_Recommendation_Model/Book_Recommendation.ann")  # Loads the pre-trained Annoy index
+annoy_index.load(annoy_model_file)  # Loads the pre-trained Annoy index
+
 
 # 📌 Function to get book recommendations
 def recommend(book):
