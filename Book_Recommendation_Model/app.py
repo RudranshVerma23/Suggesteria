@@ -17,7 +17,7 @@ def download_annoy_index(url, filename):
             st.stop()
 
 # 📌 URL of the pre-trained Annoy model (change this to your actual Hugging Face link)
-annoy_model_url = "https://huggingface.co/your-username/book-recommendation-model/resolve/main/Book_Recommendation.ann"
+annoy_model_url = "https://huggingface.co/rudranshv23/Suggesteria/resolve/main/Book_Recommendation.ann"
 annoy_model_file = "Book_Recommendation.ann"
 download_annoy_index(annoy_model_url, annoy_model_file)
 
