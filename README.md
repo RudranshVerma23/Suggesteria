@@ -22,6 +22,12 @@ This dataset contains book details, including titles, ratings, authors, and cove
 
 ---
 
+## Pre-trained Annoy model
+
+Download link for pre-trained annoy model: [Link](https://huggingface.co/rudranshv23/Suggesteria/resolve/main/Book_Recommendation.ann).
+
+Note that you don't require to do anything seperately for the pre-trained model, it is automatically extracted from the URL when you run app.py
+
 ## Description
 
 This Book Recommendation System uses a hybrid of *Content-based filtering* and *Collaborative filtering* machine learning approach to recommend book. It utilizes the Goodreads dataset, leveraging the power of Annoy (Approximate Nearest Neighbors Oh Yeah) for fast and efficient book similarity retrieval. Users can select a book from a dropdown, and the app will suggest the top 10 most similar books based on various attributes, such as book titles and ratings.
